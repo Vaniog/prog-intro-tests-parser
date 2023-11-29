@@ -6,7 +6,7 @@ services:
     ports:
       - '8080:8080'
     volumes:
-      - static_volume:/prog-intro-tests-parser/static:consistent
+      - static_volume:/app/app/static:consistent
   nginx:
     restart: unless-stopped
     build:
@@ -15,10 +15,9 @@ services:
     container_name: backend_nginx
     image: nginx
     volumes:
-      - static_volume:/prog-intro-tests-parser/static:consistent
+      - static_volume:/prog-intro-tests-parser/app/static:consistent
       - certs:/etc/nginx/certs
       - vhost:/etc/nginx/vhost.d
-      - html:/usr/share/nginx/html
       - /var/run/docker.sock:/tmp/docker.sock:ro
     depends_on:
       - flask
