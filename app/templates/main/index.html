@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <title>
+        ProgIntroSmth
+    </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}"></link>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}"></link>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <script src="{{url_for('static', filename='js/jquery-3.6.1.min.js')}}"></script>
+</head>
+<body>
+<div class="container d-flex justify-content-center mt-4">
+    <div class="col-sm-12 col-lg-5 col-md-8">
+        <label for="name" class="form-label">Name</label>
+        <input class="form-control" type="text" id="name" list="names" placeholder="ФИО как в ИСУ"/><br>
+        <datalist id="names">
+            {% for name in names %}
+            <option value="{{ name }}">{{name}} ({{ names[name] }})</option>
+            {% endfor %}
+        </datalist>
+
+        <button class="btn btn-primary" id="load">Load</button>
+    </div>
+</div>
+<div class="container d-flex justify-content-center mt-4">
+    <div class="spinner-border text-primary " role="status">
+        <span class="sr-only"></span>
+    </div>
+</div>
+<div id="data" class="ms-3 col-sm-12 col-lg-6 col-md-8">
+</div>
+
+<footer class="container justify-content-center  flex-column d-flex align-items-center">
+
+    <a href="https://github.com/DocCringol/prog-intro-tests-parser" class="text-black text-decoration-none mt-1">
+        <button class="btn btn-dark d-flex flex-row align-middle">
+            <i class="mb-0 bi bi-github align-middle"></i>
+            <span class="ms-1">Parse</span>
+        </button>
+    </a>
+    <a href="https://github.com/Vaniog/prog-intro-tests-parser/tree/flask" class="text-decoration-none mt-1 text-black">
+        <button class="btn btn-primary d-flex flex-row align-middle">
+            <i class="mb-0 bi bi-github align-middle"></i>
+            <span class="ms-1">Flask</span>
+        </button>
+    </a>
+    <span class="align-middle">
+        requests: {{requests_count}}
+</footer>
+</body>
+
+
+<script>
+    $(() => {
+        $(".spinner-border").hide()
+    })
+    $("#load").on("click", () => {
+        $(".spinner-border").show()
+        $.ajax({
+            url: 'data',
+            method: 'get',             /* Метод передачи (post или get) */
+            dataType: 'html',          /* Тип данных в ответе (xml, json, script, html). */
+            data: {
+                name: $("#name").val(),
+                group: $("#group").val()
+            },     /* Параметры передаваемые в запросе. */
+            success: function (data) {   /* функция которая будет выполнена после успешного запроса.  */
+                $("#data").html(data)
+
+                $("table").addClass("table table-sm");
+                $(".outcome.ok").addClass("bg-success bg-opacity-50")
+                $(".outcome.rj").addClass("bg-danger")
+                $(".spinner-border").hide()
+            },
+            error: function (data) {
+                $("#data").html(data.responseText)
+            }
+        })
+    })
+</script>
+</html>

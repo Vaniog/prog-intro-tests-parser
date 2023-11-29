@@ -1,0 +1,7 @@
+location /static/ {
+    alias /prog-intro-tests-parser/static/;
+}
+
+location /media/ {
+    alias /prog-intro-tests-parser/media/;
+}
