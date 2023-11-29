@@ -13,8 +13,8 @@ services:
     container_name: backend_nginx
     image: nginx
     volumes:
-      - ./static:/ParkingBackend/static:consistent
-      - ./media:/ParkingBackend/media:consistent
+      - ./static:/prog-intro-tests-parser/static:consistent
+      - ./media:/prog-intro-tests-parser/media:consistent
       - certs:/etc/nginx/certs
       - vhost:/etc/nginx/vhost.d
       - html:/usr/share/nginx/html
