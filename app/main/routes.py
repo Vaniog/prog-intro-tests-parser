@@ -6,7 +6,7 @@ import traceback
 from flask import render_template, abort, request
 import app.main.utils as utils
 from app.config import Config
-from app.main.models import count_increment, get_count
+from app.main.models import count_increment, get_count, RequestLog
 
 
 @bp.route('/', methods=['POST', 'GET'])
@@ -22,6 +22,11 @@ def get_data():
     name = data.get('name')
 
     count_increment("requests")
+    log = RequestLog(
+        name=name
+    )
+    db.session.add(log)
+    db.session.commit()
 
     return utils.main(name)
 
