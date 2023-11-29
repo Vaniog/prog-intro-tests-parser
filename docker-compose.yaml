@@ -6,7 +6,7 @@ services:
     ports:
       - '8080:8080'
     volumes:
-      - ./static:/ParkingBackend/static:consistent
+      - ./static:/prog-intro-tests-parser/static:consistent
   nginx:
     restart: unless-stopped
     build:
