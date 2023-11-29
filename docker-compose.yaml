@@ -6,7 +6,7 @@ services:
     ports:
       - '8080:8080'
     volumes:
-      - ./static:/prog-intro-tests-parser/static:consistent
+      - static_volume:/prog-intro-tests-parser/static:consistent
   nginx:
     restart: unless-stopped
     build:
@@ -15,7 +15,7 @@ services:
     container_name: backend_nginx
     image: nginx
     volumes:
-      - ./static:/prog-intro-tests-parser/static:consistent
+      - static_volume:/prog-intro-tests-parser/static:consistent
       - certs:/etc/nginx/certs
       - vhost:/etc/nginx/vhost.d
       - html:/usr/share/nginx/html
@@ -29,4 +29,4 @@ services:
 volumes:
   certs:
   vhost:
-  html:
+  static_volume:
