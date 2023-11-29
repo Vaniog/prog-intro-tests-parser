@@ -1,0 +1,7 @@
+services:
+  flask:
+    build:
+      context: .
+    stop_signal: SIGINT
+    ports:
+      - '8080:8080'
