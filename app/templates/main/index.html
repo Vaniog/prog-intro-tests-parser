@@ -77,6 +77,10 @@
                 $("table").addClass("table table-sm");
                 $(".outcome.ok").addClass("bg-success bg-opacity-50")
                 $(".outcome.rj").addClass("bg-danger")
+                $('td.student').each(function (index, value) {
+                    name = $(this).text().split(" ")[0]
+                    $(this).text(name);
+                });
                 $(".spinner-border").hide()
                 $("#load").prop('disabled', false)
             },
