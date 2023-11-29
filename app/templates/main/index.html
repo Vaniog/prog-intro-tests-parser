@@ -13,7 +13,7 @@
 </head>
 <body>
 <div class="container d-flex justify-content-center mt-4">
-    <div class="col-sm-12 col-lg-5 col-md-8">
+    <form class="col-sm-12 col-lg-5 col-md-8" id="form">
         <label for="name" class="form-label">Name</label>
         <input class="form-control" type="text" id="name" list="names" placeholder="ФИО как в ИСУ"/><br>
         <datalist id="names">
@@ -22,8 +22,8 @@
             {% endfor %}
         </datalist>
 
-        <button class="btn btn-primary" id="load">Load</button>
-    </div>
+        <input type="submit" class="btn btn-primary" id="load" value="Load">
+    </form>
 </div>
 <div class="container d-flex justify-content-center mt-4">
     <div class="spinner-border text-primary " role="status">
@@ -58,8 +58,10 @@
     $(() => {
         $(".spinner-border").hide()
     })
-    $("#load").on("click", () => {
+    $("#form").submit((event) => {
+        event.preventDefault();
         $(".spinner-border").show()
+        $("#load").prop('disabled', true)
         $.ajax({
             url: 'data',
             method: 'get',             /* Метод передачи (post или get) */
@@ -70,11 +72,11 @@
             },     /* Параметры передаваемые в запросе. */
             success: function (data) {   /* функция которая будет выполнена после успешного запроса.  */
                 $("#data").html(data)
-
                 $("table").addClass("table table-sm");
                 $(".outcome.ok").addClass("bg-success bg-opacity-50")
                 $(".outcome.rj").addClass("bg-danger")
                 $(".spinner-border").hide()
+                $("#load").prop('disabled', false)
             },
             error: function (data) {
                 $("#data").html(data.responseText)
