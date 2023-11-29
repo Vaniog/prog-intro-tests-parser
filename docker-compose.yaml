@@ -2,6 +2,7 @@ services:
   flask:
     build:
       context: .
+      dockerfile: ./Dockerfile
     stop_signal: SIGINT
     ports:
       - '8080:8080'
