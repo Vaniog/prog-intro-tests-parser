@@ -21,7 +21,7 @@
     pip install -r requirements.txt
     
     # база данных
-    flask db migrate
+    flask db upgrade
 
     # запуск
     flask run
