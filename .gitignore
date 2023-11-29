@@ -1,4 +1,4 @@
-app/app.db
+app/db/app.db
 .env
 venv
 .idea
