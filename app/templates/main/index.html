@@ -6,10 +6,10 @@
         ProgIntroSmth
     </title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}"></link>
-    <link rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}"></link>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}"></link>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"></link>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-    <script src="{{url_for('static', filename='js/jquery-3.6.1.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/jquery-3.6.1.min.js') }}"></script>
 </head>
 <body>
 <div class="container d-flex justify-content-center mt-4">
@@ -18,7 +18,7 @@
         <input class="form-control" type="text" id="name" list="names" placeholder="ФИО как в ИСУ"/><br>
         <datalist id="names">
             {% for name in names %}
-            <option value="{{ name }}">{{name}} ({{ names[name] }})</option>
+                <option value="{{ name }}">{{ name }} ({{ names[name] }})</option>
             {% endfor %}
         </datalist>
 
@@ -41,14 +41,15 @@
             <span class="ms-1">Parse</span>
         </button>
     </a>
-    <a href="https://github.com/Vaniog/prog-intro-tests-parser/tree/flask" class="text-decoration-none mt-1 text-black">
+    <a href="https://github.com/Vaniog/prog-intro-tests-parser" class="text-decoration-none mt-1 text-black">
         <button class="btn btn-primary d-flex flex-row align-middle">
             <i class="mb-0 bi bi-github align-middle"></i>
             <span class="ms-1">Flask</span>
         </button>
     </a>
     <span class="align-middle">
-        requests: {{requests_count}}
+        requests: {{ requests_count }}
+    </span>
 </footer>
 </body>
 
