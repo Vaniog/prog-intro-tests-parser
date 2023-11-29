@@ -15,7 +15,7 @@
 <div class="container d-flex justify-content-center mt-4">
     <div class="col-sm-12 col-lg-5 col-md-8">
         <label for="name" class="form-label">Name</label>
-        <input class="form-control" type="text" id="name" list="names" placeholder="Write your name"/><br>
+        <input class="form-control" type="text" id="name" list="names" placeholder="ФИО как в ИСУ"/><br>
         <datalist id="names">
             {% for name in names %}
             <option value="{{ name }}">{{name}} ({{ names[name] }})</option>
