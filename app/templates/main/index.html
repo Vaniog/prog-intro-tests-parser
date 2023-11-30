@@ -5,11 +5,13 @@
     <title>
         ProgIntroSmth
     </title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='img/favicon.png') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}"></link>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"></link>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <script src="{{ url_for('static', filename='js/jquery-3.6.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 </head>
 <body>
 <div class="container d-flex justify-content-center mt-4">
@@ -26,7 +28,7 @@
     </form>
 </div>
 <div class="container d-flex justify-content-center mt-4">
-    <div class="spinner-border text-primary " role="status">
+    <div class="spinner-border text-primary " role="status" style="display: none;">
         <span class="sr-only"></span>
     </div>
 </div>
@@ -37,19 +39,30 @@
     <span class="mb-0">
         🙂👉⭐️👈🙂
     </span>
-    <a href="https://github.com/DocCringol/prog-intro-tests-parser" class="text-black text-decoration-none mt-1">
-        <button class="btn btn-dark d-flex flex-row align-middle">
-            <i class="mb-0 bi bi-github align-middle"></i>
-            <span class="ms-1">Parse</span>
+    <div class="d-flex flex-column align-items-stretch">
+        <a href="https://github.com/DocCringol/prog-intro-tests-parser" class="text-black text-decoration-none mt-1">
+            <button class="w-100 btn btn-dark d-flex flex-row align-middle">
+                <i class="mb-0 bi bi-github align-middle"></i>
+                <span class="ms-1">Parse</span>
+            </button>
+        </a>
+        <a href="https://github.com/Vaniog/prog-intro-tests-parser" class="text-decoration-none mt-1 text-black">
+            <button class="w-100 btn btn-primary d-flex flex-row align-middle">
+                <i class="mb-0 bi bi-github align-middle"></i>
+                <span class="ms-1">Flask</span>
+            </button>
+        </a>
+        <button id="info_btn"
+                class="btn btn-light rounded border-2 mt-1 text-primary border-primary btn-sm flex-column d-flex">
+            <span>Info 30.11</span>
         </button>
-    </a>
-    <a href="https://github.com/Vaniog/prog-intro-tests-parser" class="text-decoration-none mt-1 text-black">
-        <button class="btn btn-primary d-flex flex-row align-middle">
-            <i class="mb-0 bi bi-github align-middle"></i>
-            <span class="ms-1">Flask</span>
-        </button>
-    </a>
-    <span class="align-middle">
+    </div>
+    <div id="info_text" style="display: none;"
+         class="text-black text-center" >
+        🍪 Теперь ваше имя запоминается в куках 🍪<br>
+        Если есть предложения по улучшениям, пишите в issues <a href="https://github.com/Vaniog/prog-intro-tests-parser/issues">GitHub</a>
+    </div>
+    <span class="align-middle mt-1">
         requests: {{ requests_count }}
     </span>
 </footer>
@@ -58,19 +71,22 @@
 
 <script>
     $(() => {
-        $(".spinner-border").hide()
+        //$(".spinner-border").hide()
+        $("#name").val(getCookie("name"))
     })
     $("#form").submit((event) => {
         event.preventDefault();
         $(".spinner-border").show()
+        const name_str = $("#name").val()
+        console.log(1)
+        setCookie("name", name_str, 7)
         $("#load").prop('disabled', true)
         $.ajax({
             url: 'data',
             method: 'get',             /* Метод передачи (post или get) */
             dataType: 'html',          /* Тип данных в ответе (xml, json, script, html). */
             data: {
-                name: $("#name").val(),
-                group: $("#group").val()
+                name: name_str
             },     /* Параметры передаваемые в запросе. */
             success: function (data) {   /* функция которая будет выполнена после успешного запроса.  */
                 $("#data").html(data)
@@ -88,6 +104,10 @@
                 $("#data").html(data.responseText)
             }
         })
+    })
+
+    $("#info_btn").on("click", () => {
+        $("#info_text").fadeToggle()
     })
 </script>
 </html>
