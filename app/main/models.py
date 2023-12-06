@@ -16,14 +16,7 @@ def count_increment(name):
 
 
 def get_count(name):
-    count = Count.query.filter_by(name=name).first()
-    if count is None:
-        count = Count(
-            name=name,
-            count=0
-        )
-
-    return count.count
+    return RequestLog.query.count()
 
 
 class Count(db.Model):
