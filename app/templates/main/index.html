@@ -14,105 +14,24 @@
     <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 </head>
 <body>
-<div class="container d-flex justify-content-center mt-4">
-    <form class="col-sm-12 col-lg-5 col-md-8" id="form">
-        <label for="name" class="form-label">Name</label>
-        <input class="form-control" type="text" id="name" list="names" placeholder="ФИО как в ИСУ"/><br>
-        <datalist id="names">
-            {% for name in names %}
-                <option value="{{ name }}">{{ name }} ({{ names[name] }})</option>
-            {% endfor %}
-        </datalist>
 
-        <input type="submit" class="btn btn-primary" id="load" value="Load">
-    </form>
-</div>
-<div class="container d-flex justify-content-center mt-4">
-    <div class="spinner-border text-primary " role="status" style="display: none;">
-        <span class="sr-only"></span>
-    </div>
-</div>
-<div id="data" class="ms-3 col-sm-12 col-lg-6 col-md-8">
-</div>
-
-<footer class="container justify-content-center  flex-column d-flex align-items-center">
-    <span class="mb-0">
-        🙂👉⭐️👈🙂
-    </span>
+<footer class="mt-5 container justify-content-center  flex-column d-flex align-items-center">
     <div class="d-flex flex-column align-items-stretch">
-        <a href="https://github.com/DocCringol/prog-intro-tests-parser" class="text-black text-decoration-none mt-1">
-            <button class="w-100 btn btn-dark d-flex flex-row align-middle">
-                <i class="mb-0 bi bi-github align-middle"></i>
-                <span class="ms-1">Parse</span>
+        <a href="/paradigms" class="text-decoration-none mt-1 text-black">
+            <button class="w-100 btn btn-primary d-flex flex-row align-middle d-flex justify-content-center">
+                <span class="ms-1 text-center">Paradigms</span>
             </button>
         </a>
-        <a href="https://github.com/Vaniog/prog-intro-tests-parser" class="text-decoration-none mt-1 text-black">
+        <a href="/java-advanced" class="text-decoration-none mt-1 text-black d-flex justify-content-center">
             <button class="w-100 btn btn-primary d-flex flex-row align-middle">
-                <i class="mb-0 bi bi-github align-middle"></i>
-                <span class="ms-1">Flask</span>
+                <span class="ms-1">Java Advanced</span>
             </button>
         </a>
-        <button id="info_btn"
-                class="btn btn-light rounded border-2 mt-1 text-primary border-primary btn-sm flex-column d-flex">
-            <span class="align-items-center flex-row">Info 17.12  <i
-                    class="mb-0 bi bi-info alert-danger align-middle"></i></span>
-        </button>
     </div>
-    <div id="info_text" style="display: none;"
-         class="text-black text-center">
-        🍪 Ваше имя запоминается в куках 🍪<br>
-        Если есть предложения по улучшениям, пишите в issues <a
-            href="https://github.com/Vaniog/prog-intro-tests-parser/issues">GitHub</a>
-    </div>
+
     <span class="align-middle mt-1">
         requests: {{ requests_count }}
     </span>
 </footer>
 </body>
-
-
-<script>
-    let subject = ""
-    $(() => {
-        //$(".spinner-border").hide()
-        $("#name").val(getCookie("name"))
-        subject = window.location.pathname.split("/")[1]
-    })
-    $("#form").submit((event) => {
-        event.preventDefault();
-        $(".spinner-border").show()
-        const name_str = $("#name").val()
-        console.log(1)
-        setCookie("name", name_str, 7)
-        $("#load").prop('disabled', true)
-        $.ajax({
-            url: `data`,
-            method: 'get',             /* Метод передачи (post или get) */
-            dataType: 'html',          /* Тип данных в ответе (xml, json, script, html). */
-            data: {
-                name: name_str,
-                subject: subject
-            },     /* Параметры передаваемые в запросе. */
-            success: function (data) {   /* функция которая будет выполнена после успешного запроса.  */
-                $("#data").html(data)
-                $("table").addClass("table table-sm");
-                $(".outcome.ok").addClass("bg-success bg-opacity-50")
-                $(".outcome.rj").addClass("bg-danger")
-                $('td.student').each(function (index, value) {
-                    name = $(this).text().split(" ")[0]
-                    $(this).text(name);
-                });
-                $(".spinner-border").hide()
-                $("#load").prop('disabled', false)
-            },
-            error: function (data) {
-                $("#data").html(data.responseText)
-            }
-        })
-    })
-
-    $("#info_btn").on("click", () => {
-        $("#info_text").fadeToggle()
-    })
-</script>
 </html>

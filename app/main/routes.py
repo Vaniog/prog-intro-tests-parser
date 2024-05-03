@@ -9,11 +9,15 @@ from app.config import Config
 from app.main.models import count_increment, get_count, RequestLog
 
 
-@bp.route('/paradigms', methods=['POST', 'GET'])
-@bp.route('/java-advanced', methods=['POST', 'GET'])
+@bp.route('/', methods=['GET'])
 def index():
-    print(Config.DATA_PATH)
-    return render_template('main/index.html', names=utils.get_names(), requests_count=get_count("requests"))
+    return render_template('main/index.html', requests_count=get_count("requests"))
+
+
+@bp.route('/paradigms', methods=['GET'])
+@bp.route('/java-advanced', methods=['GET'])
+def tables():
+    return render_template('main/tables.html', names=utils.get_names(), requests_count=get_count("requests"))
 
 
 @bp.route('/data', methods=['GET'])
