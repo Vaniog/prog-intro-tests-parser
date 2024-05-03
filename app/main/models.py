@@ -30,4 +30,5 @@ class Count(db.Model):
 class RequestLog(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
+    subject = db.Column(db.String(100), nullable=False)
     time_created = db.Column(db.DateTime(timezone=True), server_default=func.now())

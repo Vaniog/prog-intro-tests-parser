@@ -9,8 +9,8 @@ from app.config import Config
 from app.main.models import count_increment, get_count, RequestLog
 
 
-@bp.route('/', methods=['POST', 'GET'])
-@bp.route('/index', methods=['POST', 'GET'])
+@bp.route('/paradigms', methods=['POST', 'GET'])
+@bp.route('/java-advanced', methods=['POST', 'GET'])
 def index():
     print(Config.DATA_PATH)
     return render_template('main/index.html', names=utils.get_names(), requests_count=get_count("requests"))
@@ -20,15 +20,17 @@ def index():
 def get_data():
     data = request.args
     name = data.get('name')
+    subject = data.get('subject')
 
     count_increment("requests")
     log = RequestLog(
-        name=name
+        name=name,
+        subject=subject
     )
     db.session.add(log)
     db.session.commit()
 
-    return utils.main(name)
+    return utils.main(name, subject)
 
 
 @bp.errorhandler(500)

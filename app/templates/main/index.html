@@ -54,13 +54,15 @@
         </a>
         <button id="info_btn"
                 class="btn btn-light rounded border-2 mt-1 text-primary border-primary btn-sm flex-column d-flex">
-            <span>Info 30.11</span>
+            <span class="align-items-center flex-row">Info 17.12  <i
+                    class="mb-0 bi bi-info alert-danger align-middle"></i></span>
         </button>
     </div>
     <div id="info_text" style="display: none;"
-         class="text-black text-center" >
-        🍪 Теперь ваше имя запоминается в куках 🍪<br>
-        Если есть предложения по улучшениям, пишите в issues <a href="https://github.com/Vaniog/prog-intro-tests-parser/issues">GitHub</a>
+         class="text-black text-center">
+        🍪 Ваше имя запоминается в куках 🍪<br>
+        Если есть предложения по улучшениям, пишите в issues <a
+            href="https://github.com/Vaniog/prog-intro-tests-parser/issues">GitHub</a>
     </div>
     <span class="align-middle mt-1">
         requests: {{ requests_count }}
@@ -70,9 +72,11 @@
 
 
 <script>
+    let subject = ""
     $(() => {
         //$(".spinner-border").hide()
         $("#name").val(getCookie("name"))
+        subject = window.location.pathname.split("/")[1]
     })
     $("#form").submit((event) => {
         event.preventDefault();
@@ -82,11 +86,12 @@
         setCookie("name", name_str, 7)
         $("#load").prop('disabled', true)
         $.ajax({
-            url: 'data',
+            url: `data`,
             method: 'get',             /* Метод передачи (post или get) */
             dataType: 'html',          /* Тип данных в ответе (xml, json, script, html). */
             data: {
-                name: name_str
+                name: name_str,
+                subject: subject
             },     /* Параметры передаваемые в запросе. */
             success: function (data) {   /* функция которая будет выполнена после успешного запроса.  */
                 $("#data").html(data)
