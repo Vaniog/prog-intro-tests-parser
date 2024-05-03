@@ -115,7 +115,7 @@ def main(name, subject):
         raise Exception(f"Unknown subject: {subject}")
     with open(os.path.join(Config.DATA_PATH, 'names.json'), encoding="UTF-8") as json_file:
         name_groups = json.load(json_file)
-    group = name_groups[name]
+    group = name_groups.get(name, None)
     html = gen_page(name, group, subject)
 
     css = ""
