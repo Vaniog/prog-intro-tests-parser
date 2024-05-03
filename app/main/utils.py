@@ -113,11 +113,8 @@ def gen_page(name, group, subject):
 def main(name, subject):
     if subject != "paradigms" and subject != "java-advanced":
         raise Exception(f"Unknown subject: {subject}")
-    name_groups = dict()
     with open(os.path.join(Config.DATA_PATH, 'names.json'), encoding="UTF-8") as json_file:
         name_groups = json.load(json_file)
-    if name not in name_groups:
-        raise NotFoundStudentException("Wrong name")
     group = name_groups[name]
     html = gen_page(name, group, subject)
 
