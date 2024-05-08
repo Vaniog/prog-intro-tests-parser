@@ -2,10 +2,8 @@ import datetime
 
 from app.extensions import db
 from app.main import bp
-import traceback
-from flask import render_template, abort, request
+from flask import render_template, request
 import app.main.utils as utils
-from app.config import Config
 from app.main.models import count_increment, get_count, RequestLog
 
 
@@ -34,9 +32,9 @@ def get_data():
     db.session.add(log)
     db.session.commit()
 
-    return utils.main(name, subject)
-
-
-@bp.errorhandler(500)
-def internal_error(exception):
-    return traceback.format_exc()
+    try:
+        return utils.main(name, subject)
+    except utils.NotFoundStudentException as e:
+        return f"[NOT FOUND] student: {name}, subject: {subject}"
+    except Exception as e:
+        return e
