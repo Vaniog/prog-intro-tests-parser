@@ -36,26 +36,31 @@
 </div>
 
 <footer class="container justify-content-center  flex-column d-flex align-items-center">
-    <span class="mb-0">
-        🙂👉⭐️👈🙂
+    <span class="align-middle mt-1 mb-3">
+        <span class="border rounded border-info">{{ requests_count }}</span> requests
     </span>
     <div class="d-flex flex-column align-items-stretch">
-        <a href="https://github.com/DocCringol/prog-intro-tests-parser" class="text-black text-decoration-none mt-1">
-            <button class="w-100 btn btn-dark d-flex flex-row align-middle">
-                <i class="mb-0 bi bi-github align-middle"></i>
-                <span class="ms-1">Parse</span>
+        <div class="btn-group-vertical">
+            <button class="w-100 btn btn-sm btn-dark d-flex flex-row align-middle">
+                <a href="https://github.com/DocCringol/prog-intro-tests-parser"
+                   class="text-light text-decoration-none d-flex align-content-center">
+                    <i class="mb-0 bi bi-github align-middle"></i>
+                    <span class="ms-1">Parse</span>
+                </a>
             </button>
-        </a>
-        <a href="https://github.com/Vaniog/prog-intro-tests-parser" class="text-decoration-none mt-1 text-black">
-            <button class="w-100 btn btn-primary d-flex flex-row align-middle">
-                <i class="mb-0 bi bi-github align-middle"></i>
-                <span class="ms-1">Flask</span>
+            <button class="w-100 btn btn-sm btn-primary d-flex flex-row align-middle">
+                <a href="https://github.com/Vaniog/prog-intro-tests-parser"
+                   class="text-decoration-none text-light d-flex align-content-center">
+                    <i class="mb-0 bi bi-github align-middle"></i>
+                    <span class="ms-1">Flask</span>
+                </a>
             </button>
-        </a>
-        <button id="info_btn"
-                class="btn btn-light rounded border-2 mt-1 text-primary border-primary btn-sm flex-column d-flex">
-            <span class="align-items-center flex-row">Info 17.12</span>
-        </button>
+            <button id="info_btn"
+                    class="w-100 btn btn-light border-2 text-primary border-primary btn-sm flex-row d-flex align-middle">
+                <i class="mb-0 bi bi-info align-middle"></i>
+                <span class="ms-1">Info</span>
+            </button>
+        </div>
     </div>
     <div id="info_text" style="display: none;"
          class="text-black text-center">
@@ -63,9 +68,6 @@
         Если есть предложения по улучшениям, пишите в issues <a
             href="https://github.com/Vaniog/prog-intro-tests-parser/issues">GitHub</a>
     </div>
-    <span class="align-middle mt-1">
-        requests: {{ requests_count }}
-    </span>
 </footer>
 </body>
 
