@@ -37,8 +37,8 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            vaniog/queuehere:latest
-            vaniog/queuehere:${{ env.COMMIT_SHORT_SHA }}
+            vaniog/nicetable:latest
+            vaniog/nicetable:${{ env.COMMIT_SHORT_SHA }}
             
       - name: Trigger watchtower to update container(s)
         shell: bash
